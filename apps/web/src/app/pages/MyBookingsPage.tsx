@@ -80,11 +80,11 @@ export function MyBookingsPage() {
                   <span className="font-semibold mr-2">Ghế:</span>
                   {booking.seats.map((seat: any) => (
                     <span key={seat.id} className="bg-background px-2 py-1 rounded inline-block text-xs border border-border/50">
-                      Ghế {seat.seatConfig.row}{seat.seatConfig.number}
+                      Ghế {seat.seat.row}{seat.seat.number}
                     </span>
                   ))}
                   <span className="text-primary font-bold ml-auto">
-                    {booking.totalAmount.toLocaleString('vi-VN')} đ
+                    {booking.totalPrice.toLocaleString('vi-VN')} đ
                   </span>
                 </div>
               </div>
