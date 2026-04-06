@@ -2,7 +2,7 @@
 
 ## 1. Clone & cài dependencies
 ```bash
-cd /var/www
+cd /home/ubuntu
 git clone https://github.com/newli5737/ticket-mini.git
 cd ticket-mini
 npm install
@@ -66,7 +66,7 @@ certbot --nginx -d api-ticket.bscxau.link
 
 ## Cập nhật sau này
 ```bash
-cd /var/www/ticket-mini
+cd /home/ubuntu/ticket-mini
 git pull
 npm install
 cd apps/api && npm run build && cd ../..
