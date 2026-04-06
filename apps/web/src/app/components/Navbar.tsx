@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import { Search, Menu, X, Shield } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useAuthStore } from '../../stores/authStore';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuSeparator, DropdownMenuLabel } from './ui/dropdown-menu';
 
 interface NavbarProps {
   onLoginClick: () => void;
@@ -33,6 +34,11 @@ export function Navbar({ onLoginClick }: NavbarProps) {
             <Link to="/" className="text-foreground/70 hover:text-foreground transition-colors">
               Sự kiện
             </Link>
+            {user && (
+              <Link to="/my-tickets" className="text-foreground/70 hover:text-foreground transition-colors">
+                Vé của tôi
+              </Link>
+            )}
             {user?.role === 'ADMIN' && (
               <Link to="/admin" className="text-foreground/70 hover:text-foreground transition-colors flex items-center gap-1">
                 <Shield className="w-4 h-4" />
@@ -44,15 +50,33 @@ export function Navbar({ onLoginClick }: NavbarProps) {
           <div className="flex items-center gap-4">
             {user ? (
               <div className="flex items-center gap-3">
-                <span className="hidden md:block text-sm text-muted-foreground">
-                  Xin chào, <span className="text-foreground font-medium">{user.name}</span>
-                </span>
-                <button
-                  onClick={logout}
-                  className="px-4 py-2 rounded-xl bg-muted/50 hover:bg-muted transition-colors text-sm"
-                >
-                  Đăng xuất
-                </button>
+                <DropdownMenu>
+                  <DropdownMenuTrigger className="hidden md:flex items-center gap-2 outline-hidden">
+                    <span className="text-sm text-muted-foreground mr-1">Xin chào,</span>
+                    <div className="w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold text-sm">
+                      {user.name.charAt(0).toUpperCase()}
+                    </div>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end" className="w-56 mt-2">
+                    <DropdownMenuLabel className="font-normal">
+                      <div className="flex flex-col space-y-1">
+                        <p className="text-sm font-medium leading-none">{user.name}</p>
+                        <p className="text-xs leading-none text-muted-foreground">{user.email}</p>
+                      </div>
+                    </DropdownMenuLabel>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem asChild>
+                      <Link to="/profile" className="cursor-pointer">Thông tin tài khoản</Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem asChild>
+                      <Link to="/my-tickets" className="cursor-pointer">Vé của tôi</Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem onClick={logout} className="text-red-500 focus:text-red-500 cursor-pointer">
+                      Đăng xuất
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
               </div>
             ) : (
               <button
@@ -85,10 +109,25 @@ export function Navbar({ onLoginClick }: NavbarProps) {
               <Link to="/" className="block px-4 py-2 rounded-lg hover:bg-muted transition-colors" onClick={() => setIsMenuOpen(false)}>
                 Sự kiện
               </Link>
+              {user && (
+                <>
+                  <Link to="/my-tickets" className="block px-4 py-2 rounded-lg hover:bg-muted transition-colors" onClick={() => setIsMenuOpen(false)}>
+                    Vé của tôi
+                  </Link>
+                  <Link to="/profile" className="block px-4 py-2 rounded-lg hover:bg-muted transition-colors" onClick={() => setIsMenuOpen(false)}>
+                    Thông tin cá nhân
+                  </Link>
+                </>
+              )}
               {user?.role === 'ADMIN' && (
                 <Link to="/admin" className="block px-4 py-2 rounded-lg hover:bg-muted transition-colors" onClick={() => setIsMenuOpen(false)}>
                   Quản trị
                 </Link>
+              )}
+              {user && (
+                 <button onClick={() => { logout(); setIsMenuOpen(false); }} className="block w-full text-left px-4 py-2 text-red-500 rounded-lg hover:bg-red-500/10 transition-colors">
+                   Đăng xuất
+                 </button>
               )}
             </div>
           </motion.div>

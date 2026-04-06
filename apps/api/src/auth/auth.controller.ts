@@ -53,4 +53,23 @@ export class AuthController {
   async getProfile(@Request() req) {
     return this.authService.getProfile(req.user.sub);
   }
+
+  @UseGuards(JwtAuthGuard)
+  @Post('profile') // Use POST or PUT for update
+  async updateProfile(@Request() req, @Body() body: { name: string }) {
+    return this.authService.updateProfile(req.user.sub, body.name);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Post('password')
+  async changePassword(
+    @Request() req,
+    @Body() body: { currentPassword: string; newPassword: string },
+  ) {
+    return this.authService.changePassword(
+      req.user.sub,
+      body.currentPassword,
+      body.newPassword,
+    );
+  }
 }

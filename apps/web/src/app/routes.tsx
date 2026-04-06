@@ -5,6 +5,8 @@ import { EventDetailPage } from './pages/EventDetailPage';
 import { SeatSelectionPage } from './pages/SeatSelectionPage';
 import { CheckoutPage } from './pages/CheckoutPage';
 import { PaymentSuccessPage } from './pages/PaymentSuccessPage';
+import { MyBookingsPage } from './pages/MyBookingsPage';
+import { ProfilePage } from './pages/ProfilePage';
 import { AdminLayout } from './pages/admin/AdminLayout';
 import { AdminDashboard } from './pages/admin/AdminDashboard';
 import { AdminBankAccounts } from './pages/admin/AdminBankAccounts';
@@ -20,6 +22,8 @@ export const router = createBrowserRouter([
       { path: 'event/:slug/seats', Component: SeatSelectionPage },
       { path: 'checkout/:bookingId', Component: CheckoutPage },
       { path: 'success/:bookingId', Component: PaymentSuccessPage },
+      { path: 'my-tickets', Component: MyBookingsPage },
+      { path: 'profile', Component: ProfilePage },
     ],
   },
   {
