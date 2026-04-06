@@ -57,12 +57,12 @@ export function MyBookingsPage() {
                 <div className="flex justify-between items-start mb-2">
                   <h3 className="text-xl font-bold">{booking.event.title}</h3>
                   <span className={`px-3 py-1 text-xs font-semibold rounded-full ${
-                    booking.status === 'CONFIRMED' ? 'bg-green-500/10 text-green-500' :
-                    booking.status === 'PENDING_PAYMENT' ? 'bg-yellow-500/10 text-yellow-500' :
+                    booking.status === 'PAID' ? 'bg-green-500/10 text-green-500' :
+                    booking.status === 'PENDING' ? 'bg-yellow-500/10 text-yellow-500' :
                     'bg-red-500/10 text-red-500'
                   }`}>
-                    {booking.status === 'CONFIRMED' ? 'Đã Thanh Toán' : 
-                     booking.status === 'PENDING_PAYMENT' ? 'Chờ Thanh Toán' : 'Đã Hủy'}
+                    {booking.status === 'PAID' ? 'Đã Thanh Toán' : 
+                     booking.status === 'PENDING' ? 'Chờ Thanh Toán' : 'Đã Hủy'}
                   </span>
                 </div>
                 <div className="text-muted-foreground space-y-1 mb-4 text-sm">
