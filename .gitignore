@@ -1,0 +1,8 @@
+node_modules/
+dist/
+.env
+uploads/*
+!uploads/.gitkeep
+
+# Reference design (not part of build)
+fe-figma/
